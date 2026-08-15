@@ -1,0 +1,10 @@
+/target
+**/*.rs.bk
+*.pdb
+.env
+.env.*
+!.env.example
+# Reports are run output, not source — and may reference workspace paths
+# from whatever was under test.
+report.jsonl
+*.report.jsonl

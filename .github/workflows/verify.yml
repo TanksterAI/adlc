@@ -1,0 +1,51 @@
+# CI is defined once in TanksterAI/.github and called from here.
+# Change the shared pipeline there, not in this file.
+#
+# The scope-note guard below is ADLC-specific. It deliberately checks for
+# the *presence* of the honesty note rather than banning dangerous phrasing
+# — a "must contain this anchor sentence" check survives an innocent
+# paragraph rewrap; a "must not contain database+validation nearby" check
+# does not, and would as happily fire on this file's own hedged prose as on
+# a real overclaim. See CLAUDE.md's "not multi-domain yet" for the rule this
+# enforces.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: TanksterAI/.github/.github/workflows/rust-ci.yml@v1
+    with:
+      # Cargo.toml declares rust-version = "1.82", matching grit and
+      # agent-egress-proxy — CI tests the version this crate claims to
+      # support, not whatever stable happens to be.
+      toolchain: "1.82"
+      forbid-panics: true
+      build-release: true
+
+  guard-scope-note:
+    name: Guard the filesystem-only scope note
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - name: Guard the filesystem-only scope note
+        run: |
+          if ! grep -q "one real implementation" src/lib.rs; then
+            echo "::error::src/lib.rs no longer states that FilesystemProbe is StateProbe's one real implementation. If a second StateProbe (database/API) has genuinely shipped, update this guard deliberately rather than letting it go silently stale."
+            exit 1
+          fi
+          echo "filesystem-only scope note present"
