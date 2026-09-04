@@ -8,8 +8,7 @@ Everything there applies. This adds only what is specific to ADLC.
 The ADLC Execution Harness: adversarial test-case generation for MCP tool
 calls, judged by a real filesystem before/after diff rather than by reading
 what the tool printed. Pillar 2 of the three-pillar Tankster AI portfolio
-narrative from the Jack & Jill correspondence — Pillar 1 is `grit`, Pillar 3
-is the Agentic Data Lake.
+narrative — Pillar 1 is `grit`, Pillar 3 is the Agentic Data Lake.
 
 ## What this is *not* — read before changing anything
 
@@ -18,10 +17,11 @@ is the Agentic Data Lake.
   verdict get described anywhere as validating semantic correctness; it
   validates a set-of-paths diff against a declared expectation and nothing
   more.
-- **Not multi-domain yet.** Jack's own framing names filesystem, database
-  and API state. `StateProbe` is the seam; `FilesystemProbe` is the only
-  real implementation. Do not describe database or API state-transition
-  validation as shipped — it is a real, unbuilt extension of the trait.
+- **Not multi-domain yet.** State-transition validation should eventually
+  cover filesystem, database and API state alike. `StateProbe` is the seam;
+  `FilesystemProbe` is the only real implementation. Do not describe
+  database or API state-transition validation as shipped — it is a real,
+  unbuilt extension of the trait.
 - **Not LLM-backed generation.** `RuleBasedGenerator` is deterministic and
   needs no model key. `CaseGenerator` is a trait so a model-backed
   generator can be a second implementation later; it is not a stub for one

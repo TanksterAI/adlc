@@ -12,12 +12,11 @@
 //! `Modifies` check as one that wrote it correctly. Pair this with
 //! content-level assertions of your own; it is not a substitute for them.
 //!
-//! **Filesystem only, in this version.** Jack's own framing of this pillar
-//! names "filesystem, DB, API" as the domains state-transition validation
-//! should cover. `StateProbe` is the seam for that — `FilesystemProbe` is
-//! the one real implementation shipped here. A database probe or an API
-//! probe is a real extension, not a stub pretending to be one; nothing here
-//! claims coverage it doesn't have.
+//! **Filesystem only, in this version.** State-transition validation should
+//! eventually cover filesystem, database and API state alike. `StateProbe`
+//! is the seam for that — `FilesystemProbe` is the one real implementation
+//! shipped here. A database probe or an API probe is a real extension, not
+//! a stub pretending to be one; nothing here claims coverage it doesn't have.
 //!
 //! **The mutation strategies are rule-based, not an LLM.** `CaseGenerator`
 //! is the seam; `RuleBasedGenerator` is deterministic and needs no model

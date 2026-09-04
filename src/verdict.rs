@@ -2,9 +2,8 @@
 //!
 //! This is the whole point of the crate: a verdict comes from a real
 //! filesystem diff, never from reading whatever the tool under test
-//! printed. See Jack's own framing of the pillar — "state-transition
-//! validation rather than output 'vibe checks'" — which is a description
-//! this module is built to actually satisfy, not just claim.
+//! printed — state-transition validation, not an output "vibe check." This
+//! module exists to make that real, not just claim it.
 
 use std::collections::BTreeSet;
 use std::path::PathBuf;

@@ -7,7 +7,7 @@
 //! through looks exactly like a diff computed from a complete one. Exceeding
 //! `Limits` is `AdlcError::SnapshotBounds`, never a shorter-than-requested
 //! `StateSnapshot`. This is written fresh here rather than depending on
-//! Grit's crate — see `CLAUDE.md` for why keeping the two repos'  CI
+//! Grit's crate — see `CLAUDE.md` for why keeping the two repos' CI
 //! independent won the trade against reuse.
 //!
 //! # Design decision: a symlink pointing outside the workspace is never captured
