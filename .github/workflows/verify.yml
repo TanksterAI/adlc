@@ -27,10 +27,12 @@ jobs:
   ci:
     uses: TanksterAI/.github/.github/workflows/rust-ci.yml@v1
     with:
-      # Cargo.toml declares rust-version = "1.82", matching grit and
-      # agent-egress-proxy — CI tests the version this crate claims to
-      # support, not whatever stable happens to be.
-      toolchain: "1.82"
+      # Cargo.toml declares rust-version = "1.85", matching grit, stratum,
+      # docket and agent-egress-proxy — CI tests the version this crate
+      # claims to support, not whatever stable happens to be. Bumped from
+      # 1.82: zeroize/getrandom versions already in Cargo.lock require
+      # edition2024, stabilised at 1.85.
+      toolchain: "1.85"
       forbid-panics: true
       build-release: true
 
