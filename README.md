@@ -138,3 +138,15 @@ cargo test                                  # unit + integration + doctest
 cargo clippy --all-targets -- -D warnings
 cargo fmt --check
 ```
+
+## Provenance and licence
+
+Designed and built by [Rishi Tank](https://rishitank.co.uk) as sole engineer, and owned by
+Tankster AI Ltd — the AI-native product studio he founded, which runs it in its own estate.
+ADLC is one of the four components of the
+[Robustness Layer](https://rishitank.co.uk/robustness-layer), an agent-containment stack in
+which each component answers one question the others do not trust it to have answered: this
+one answers *did containment actually hold, or did the agent just say it did?* The full case
+study is at [rishitank.co.uk/projects/adlc](https://rishitank.co.uk/projects/adlc).
+
+Released under the [MIT License](LICENSE).
