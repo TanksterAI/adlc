@@ -51,3 +51,20 @@ jobs:
             exit 1
           fi
           echo "filesystem-only scope note present"
+
+  # The one check the org-wide `ci-gate` ruleset requires. It passes only when every
+  # CI job listed in `needs` succeeded or was deliberately skipped, so the org rule
+  # never needs to know this repo's job names. Add new CI jobs to `needs`.
+  ci-gate:
+    name: ci-gate
+    if: always()
+    needs: [ci, guard-scope-note]
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: All required CI jobs passed
+        env:
+          RESULTS: ${{ toJSON(needs) }}
+        run: |
+          echo "$RESULTS" | jq -e 'to_entries | all(.value.result == "success" or .value.result == "skipped")' >/dev/null \
+            || { echo "::error::A required CI job failed or was cancelled:"; echo "$RESULTS" | jq -r 'to_entries[] | "\(.key): \(.value.result)"'; exit 1; }
