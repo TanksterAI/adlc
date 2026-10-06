@@ -7,8 +7,8 @@ Everything there applies. This adds only what is specific to ADLC.
 
 The ADLC Execution Harness: adversarial test-case generation for MCP tool
 calls, judged by a real filesystem before/after diff rather than by reading
-what the tool printed. Pillar 2 of the three-pillar Tankster AI portfolio
-narrative — Pillar 1 is `grit`, Pillar 3 is the Agentic Data Lake.
+what the tool printed. One of the four components of
+Tankster AI's Robustness Layer, alongside `grit`, `agent-egress-proxy` and Agent OS.
 
 ## What this is *not* — read before changing anything
 
