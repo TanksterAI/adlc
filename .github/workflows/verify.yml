@@ -1,5 +1,7 @@
-# CI is defined once in TanksterAI/.github and called from here.
-# Change the shared pipeline there, not in this file.
+# CI is defined once in TanksterAI/.github. This repository is public and
+# cannot call that private repository, so it runs a vendored copy
+# (shared-rust-ci.yml). Change the shared pipeline there and re-copy it,
+# not in this file.
 #
 # The scope-note guard below is ADLC-specific. It deliberately checks for
 # the *presence* of the honesty note rather than banning dangerous phrasing
@@ -25,7 +27,9 @@ permissions:
 
 jobs:
   ci:
-    uses: TanksterAI/.github/.github/workflows/rust-ci.yml@v1
+    # Vendored copy: this repository is public and cannot call the private
+    # TanksterAI/.github. Provenance and the way back are in that file's header.
+    uses: ./.github/workflows/shared-rust-ci.yml
     with:
       # Cargo.toml declares rust-version = "1.85", matching grit, stratum,
       # docket and agent-egress-proxy — CI tests the version this crate
